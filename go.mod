@@ -1,6 +1,6 @@
 module github.com/BrainStation-23/dsdoc-backend
 
-// +heroku goVersion go1.15
+// +heroku goVersion go1.18
 go 1.18
 
 require (
