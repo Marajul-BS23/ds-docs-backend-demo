@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
 	"reflect"
 	"time"
@@ -74,7 +75,8 @@ func UpdateTask(c *gin.Context){
 		return
 	}
 
-	var input model.UpdateTask
+	var input model.UpdateTask 
+	
 	if err := c.ShouldBindJSON(&input); err != nil {
 	  c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	  return
@@ -99,5 +101,54 @@ func UpdateTask(c *gin.Context){
 }
 
 func GetTask(c *gin.Context) {
+	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+	var tasks []model.Task
+
+	User_Id_1,_ := c.Get("uid")
+	User_id := User_Id_1.(string)
+
+	value,_ := TaskCollection.Find(ctx, bson.M{"user_id":User_id})
+	defer cancel()
+
+	for value.Next(context.TODO()) {
+        //Create a value into which the single document can be decoded
+        var elem model.Task
+        err := value.Decode(&elem)
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        tasks =append(tasks, elem)
+
+    }
+
+
+	c.JSON(http.StatusOK, gin.H{"data":tasks})
+
+}
+
+
+func DeleteTask(c *gin.Context){
+	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+	defer cancel()
+	
+	Updated_id,_ := primitive.ObjectIDFromHex(c.Param("id"))
+	User_Id_1,_ := c.Get("uid")
+	User_id := User_Id_1.(string)
+	
+	fmt.Println(User_id)
+
+	res,err := TaskCollection.DeleteOne(ctx, bson.M{"_id":Updated_id,"user_id":User_id})
+	
+
+	if err!=nil{
+		c.JSON(http.StatusInternalServerError, gin.H{ "error": err.Error()})
+		return
+	}
+
+	
+
+	c.JSON(http.StatusOK, gin.H{"data":res})
+	
 
 }

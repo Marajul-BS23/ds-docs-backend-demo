@@ -10,5 +10,6 @@ func TaskRouter(router *gin.Engine){
 	router.Use(middleware.Authenticate)
 	router.POST("/task",controllers.CreateTaks)
 	router.GET("/task",controllers.GetTask)
-	router.PATCH("/task/:id",controllers.UpdateTask)
+	router.PUT("/task/:id",controllers.UpdateTask)
+	router.DELETE("/task/:id",controllers.DeleteTask)
 }

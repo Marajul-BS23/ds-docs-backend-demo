@@ -83,11 +83,6 @@ func Login(c *gin.Context) {
 	c.SetCookie("token",*foundUser.Token, 60*60*24, "/", "localhost:5000", false, false)
 	
 	c.JSON(http.StatusOK, foundUser)
-	
-	
-
-	
-	
 		
 }
 
