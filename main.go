@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	routes "github.com/BrainStation-23/ds-docs-backend-demo/routers"
 	"github.com/gin-gonic/gin"
 )
@@ -12,10 +14,10 @@ func main() {
 	// }
 
 
-	// port := os.Getenv("PORT")
-	// if port == "" {
-	// 	port = "5000";
-	// }
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000";
+	}
 
 	router := gin.New()
 	router.Use(gin.Logger())
@@ -23,7 +25,5 @@ func main() {
 	routes.AuthRouter(router)
 	routes.TaskRouter(router)
 
-	// router.Run(":" + port)
-
-	router.Run()
+	router.Run(":" + port)
 }
