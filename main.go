@@ -25,7 +25,7 @@ func main() {
 	routes.AuthRouter(router)
 	routes.TaskRouter(router)
 
+	// router.Run(":" + port)
 
-	router.Run(":" + port)
-
+	router.Run()
 }
