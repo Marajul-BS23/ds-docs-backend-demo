@@ -1,1 +1,1 @@
-web:go run .
+web:ds-docs-backend-demo

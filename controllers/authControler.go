@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/BrainStation-23/dsdoc-backend/database"
-	helper "github.com/BrainStation-23/dsdoc-backend/helpers"
-	model "github.com/BrainStation-23/dsdoc-backend/models"
+	"github.com/BrainStation-23/ds-docs-backend-demo/database"
+	helper "github.com/BrainStation-23/ds-docs-backend-demo/helpers"
+	model "github.com/BrainStation-23/ds-docs-backend-demo/models"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"go.mongodb.org/mongo-driver/bson"

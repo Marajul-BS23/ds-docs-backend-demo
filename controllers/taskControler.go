@@ -8,8 +8,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/BrainStation-23/dsdoc-backend/database"
-	model "github.com/BrainStation-23/dsdoc-backend/models"
+	"github.com/BrainStation-23/ds-docs-backend-demo/database"
+	model "github.com/BrainStation-23/ds-docs-backend-demo/models"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

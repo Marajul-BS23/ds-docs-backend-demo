@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/BrainStation-23/dsdoc-backend/database"
+	"github.com/BrainStation-23/ds-docs-backend-demo/database"
 	jwt "github.com/dgrijalva/jwt-go"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

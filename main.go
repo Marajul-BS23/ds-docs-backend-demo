@@ -1,7 +1,7 @@
 package main
 
 import (
-	routes "github.com/BrainStation-23/dsdoc-backend/routers"
+	routes "github.com/BrainStation-23/ds-docs-backend-demo/routers"
 	"github.com/gin-gonic/gin"
 )
 func main() {
