@@ -1,1 +1,1 @@
-web: dsdoc-backend
+web:go run .
