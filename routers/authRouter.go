@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/BrainStation-23/dsdoc-backend/controllers"
+	"github.com/BrainStation-23/ds-docs-backend-demo/controllers"
 	"github.com/gin-gonic/gin"
 )
 

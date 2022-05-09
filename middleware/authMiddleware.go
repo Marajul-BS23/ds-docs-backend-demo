@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	helper "github.com/BrainStation-23/dsdoc-backend/helpers"
+	helper "github.com/BrainStation-23/ds-docs-backend-demo/helpers"
 	"github.com/gin-gonic/gin"
 )
 
