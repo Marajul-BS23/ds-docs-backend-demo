@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"reflect"
 	"time"
 
 	"github.com/BrainStation-23/ds-docs-backend-demo/database"
@@ -38,8 +37,8 @@ func CreateTaks(c *gin.Context) {
 
 
 	user_id,_ := c.Get("uid")
-	fmt.Println(reflect.TypeOf(user_id))
 	user_id_OK, _ := user_id.(string)
+	
 	task.User_ID = user_id_OK
 	task.ID = primitive.NewObjectID()
 	task.Created_at,_ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
@@ -48,7 +47,7 @@ func CreateTaks(c *gin.Context) {
 
 	resultInsertionNumber, insertErr := TaskCollection.InsertOne(ctx, task)
 	if insertErr !=nil {
-		msg := fmt.Sprintf("Task item was not created")
+		msg := "Task item was not created"
 		c.JSON(http.StatusInternalServerError, gin.H{"error":msg})
 		return
 	}

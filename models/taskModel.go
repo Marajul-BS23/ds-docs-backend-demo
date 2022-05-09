@@ -27,5 +27,5 @@ type UpdateTask struct{
 	Project_ID    *string            	`json:"project_id,omitempty"`
 	Status        *string            	`json:"status,omitempty"`
 	Catagory_ID   *string            	`json:"category_id,omitempty"`
-	Date          *string				`json:"date,omitempty"`
+	Date          *string							`json:"date,omitempty"`
 }
