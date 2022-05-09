@@ -115,26 +115,22 @@ func Signup(c *gin.Context) {
 		return
 	}
 
-	_, err := userCollection.CountDocuments(ctx, bson.M{"email":user.Email})
+	count, err := userCollection.CountDocuments(ctx, bson.M{"$or": []bson.M{{"email": user.Email},{"phone": user.Phone},{"bsid": user.BsId}}})
 	defer cancel()
 	if err != nil {
 		log.Panic(err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error":"error occured while checking for the email"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error":"error occured while checking for the email/phone/bsid"})
+		return
+	}
+	if count >0{
+		c.JSON(http.StatusInternalServerError, gin.H{"error":"this email or phone number or bsID already exists"})
+		return
 	}
 
 	password := HashPassword(*user.Password)
 	user.Password = &password
 
-	count, err := userCollection.CountDocuments(ctx, bson.M{"phone":user.Phone})
-	defer cancel()
-	if err!= nil {
-		log.Panic(err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error":"error occured while checking for the phone number"})
-	}
 
-	if count >0{
-		c.JSON(http.StatusInternalServerError, gin.H{"error":"this email or phone number already exists"})
-	}
 
 	user_type := "USER"
 	user.User_type = &user_type
