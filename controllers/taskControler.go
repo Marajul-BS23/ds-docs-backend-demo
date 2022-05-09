@@ -105,6 +105,7 @@ func GetTask(c *gin.Context) {
 
 	User_Id_1,_ := c.Get("uid")
 	User_id := User_Id_1.(string)
+	
 
 	value,_ := TaskCollection.Find(ctx, bson.M{"user_id":User_id})
 	defer cancel()

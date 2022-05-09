@@ -1,1 +1,1 @@
-web:ds-docs-backend-demo
+web: currency
