@@ -17,7 +17,7 @@ import (
 
 var TaskCollection *mongo.Collection = database.OpenCollection(database.Client, "task")
 
-func CreateTaks(c *gin.Context) {
+func CreateTask(c *gin.Context) {
 	// user_name,_ := c.Get("email")
 	// c.JSON(http.StatusOK, gin.H{"name":user_name})
 
@@ -149,5 +149,55 @@ func DeleteTask(c *gin.Context){
 
 	c.JSON(http.StatusOK, gin.H{"data":res})
 	
+
+}
+
+
+func GetAllTask(c *gin.Context){
+	ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+	defer cancel()
+
+	var data []model.Task
+	
+	dataCursor, _ := TaskCollection.Find(ctx, bson.M{})
+
+	for dataCursor.Next(context.TODO()){
+		var elem model.Task
+		if err := dataCursor.Decode(&elem); err != nil{
+			log.Fatal(err)
+		}
+		data = append(data, elem)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": data})
+}
+
+
+func GetTaskByUID(c *gin.Context){
+	ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+	defer cancel()
+
+	userId := c.Param("id")
+
+	
+	var data []model.Task
+
+	dataCursor, _ := TaskCollection.Find(ctx, bson.M{"user_id": userId})
+
+
+
+	for dataCursor.Next(context.TODO()){
+		var elem model.Task
+		dataCursor.Decode(&elem)
+		log.Print("element -> ", elem)
+		data = append(data, elem)
+	}
+
+	if(len(data) == 0){
+		c.JSON(http.StatusBadRequest, gin.H{"error": "no user found with given id"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": data})
 
 }

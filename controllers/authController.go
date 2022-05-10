@@ -132,8 +132,8 @@ func Signup(c *gin.Context) {
 
 
 
-	user_type := "USER"
-	user.User_type = &user_type
+	// user_type := "USER"
+	// user.User_type = &user_type
 	
 	user.Created_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 	user.Updated_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
@@ -152,3 +152,6 @@ func Signup(c *gin.Context) {
 	defer cancel()
 	c.JSON(http.StatusOK, resultInsertionNumber)
 }
+
+func Logout(c *gin.Context){
+}	

@@ -1,17 +1,19 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	routes "github.com/BrainStation-23/ds-docs-backend-demo/routers"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 func main() {
 	//  load env files to os in dev
-	// err := godotenv.Load(".env")
-	// if err!=nil {
-	// 	log.Fatal("Error loding Env File")
-	// }
+	err := godotenv.Load(".env")
+	if err!=nil {
+		log.Fatal("Error loding Env File")
+	}
 
 
 	port := os.Getenv("PORT")
