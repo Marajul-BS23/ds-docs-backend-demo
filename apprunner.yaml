@@ -1,0 +1,8 @@
+version: 1.0
+runtime: go
+build:
+  commands:
+    build:
+      - go mod download
+run: 
+  command: go run main.go
